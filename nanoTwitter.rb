@@ -1,10 +1,12 @@
 require 'typhoeus'
 require 'byebug'
 require 'json'
+require_relative 'rpc_client.rb'
 
 class NanotwitterClient
-  def initialize (name)
-    @name = name
+  def initialize
+    a=RpcClient.new
+    a.start("Hello")
   end
 
   def find_tweet(id)
@@ -17,7 +19,7 @@ class NanotwitterClient
 
 	#tweets is 'how many recent tweets you want'
   def recent_tweets(count)
-    start("/tweets/recent?#{count}")
+    start("/recent/tweets?#{count}")
   end
 
   def users_recent_tweets(id, count)
